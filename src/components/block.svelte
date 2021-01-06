@@ -1,7 +1,13 @@
 <script>
     export let name;
     let message = '';
-    export let messages = [];
+    export let messages = [
+        {
+            id: 1609937812087,
+            text: ' Bien le bonjour Mr White !',
+            author: 'Benoit'
+        }
+    ];
     
     function updateMessage(event) {
         // console.log(event.target.value);
@@ -21,6 +27,7 @@
         message = '';
 
     }
+
 </script>
 
 <!-- Mon style -->
@@ -45,13 +52,46 @@
 			max-width: none;
 		}
 	}
+
+    hr {
+        width: 50%;
+    }
+    .display {
+        width: 60%;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 1em;
+        border-radius: 10px;
+
+        &-tab {
+            background-color: rgb(156,205,202);
+            padding: 1em;
+            border-radius: 5px;
+
+            &--item {
+                list-style: none;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            &--message {
+                padding-top: 1em;
+                padding-left: 2em;
+                font-size: 1.5rem;
+                color: white;
+                text-transform: none;
+                font-weight: 300;
+            }
+        }
+
+    } 
 </style>
 	
 <!-- Mon code  -->
 
 <main class="main">
 	<h1>{name}</h1>
-    <textarea cols="50" rows="5" on:input={updateMessage}></textarea>
+    <textarea cols="50" rows="5" on:input={updateMessage} placeholder="Write something..."></textarea>
 </main>
 
 <button on:click={savedMessage}>send</button>
@@ -63,9 +103,9 @@
     <div class="display-tab">
         {#each messages as message}
 
-        <li>
-            {message.author} / {message.id} :
-            <div>{message.text}</div>
+        <li class="display-tab--item">
+            {message.author} - <span class="date">{message.id}</span>  :
+            <div class="display-tab--message">{message.text}</div>
         </li>
         <br>
         {/each}

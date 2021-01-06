@@ -11,6 +11,7 @@
 	background-color: rgba(156,205,202, .5);
 	margin: auto;
 	border-radius: 5px;
+	padding: 10px;
 }
 
 </style>
