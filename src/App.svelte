@@ -1,34 +1,24 @@
 <script>
-	export let name;
+	import Block from './components/block.svelte';
 </script>
 
-<main class="test">
-	<h1>Hello {name}!</h1>
-	<p class="test-p">Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<!-- Mon style -->
 
 <style type="text/scss">
-	.test {
-		text-align: center;
-		padding: 1em;
-		margin: 0 auto;
 
-		&-p {
-			width: 240px;
-			margin: auto;
-		}
-	}
+.container {
+	width: 80%;
+	background-color: rgba(156,205,202, .5);
+	margin: auto;
+	border-radius: 5px;
+}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
 </style>
+	
+<!-- Mon code  -->
+
+<main class='container'>
+
+	<Block name = Switter/>
+
+</main>
