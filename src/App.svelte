@@ -1,5 +1,20 @@
 <script>
 	import Block from './components/block.svelte';
+	import List from './components/listMessages.svelte';
+
+	let messages = [
+        {
+            id: 1609937812087,
+            text: ' Bien le bonjour Mr White !',
+            author: 'Benoit'
+        }
+	];
+	
+
+	function addMessage (event) {
+		let newMessage = event.detail;
+		messages = [ newMessage, ...messages]
+	}
 </script>
 
 <!-- Mon style -->
@@ -13,13 +28,17 @@
 	border-radius: 5px;
 	padding: 10px;
 }
-
 </style>
 	
 <!-- Mon code  -->
 
 <main class='container'>
 
-	<Block name = Switter/>
-
+	<Block 
+		name = Switter
+		author = 'Bob'
+		on:message={addMessage}
+	/>
+	<List messages = {messages} />
 </main>
+

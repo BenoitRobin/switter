@@ -1,28 +1,22 @@
 <script>
+
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
     export let name;
+    export let author;
     let message = '';
-    export let messages = [
-        {
-            id: 1609937812087,
-            text: ' Bien le bonjour Mr White !',
-            author: 'Benoit'
-        }
-    ];
-    
-    function updateMessage(event) {
-        // console.log(event.target.value);
-        message = event.target.value;
-    }
+   
 
     function savedMessage() {
         const newMessage = {
             id: Date.now(),
             text: message,
-            author: 'Sam' 
+            author: author 
         }
 
-        messages = [newMessage, ...messages];
-        console.log('Mes messages : ', messages); 
+        dispatch('message', newMessage)
 
         message = '';
 
@@ -38,6 +32,12 @@
 		padding: 1em;
 		margin: 0 auto;
 
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+
 	}
 
 	h1 {
@@ -47,67 +47,39 @@
 		font-weight: 100;
 	}
 
+    .btn {
+        width: 25%;
+        align-self: flex-end;
+        padding: .5em 0;
+        border-radius: 5px;
+        background-color:  rgb(156,205,202);
+    }
+
+    .btn:hover {
+        background-color: #ff3e00;
+        color: #fff;
+    }
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
 		}
 	}
 
+
     hr {
         width: 50%;
     }
-    .display {
-        width: 60%;
-        margin: 20px auto;
-        background-color: #fff;
-        padding: 1em;
-        border-radius: 10px;
 
-        &-tab {
-            background-color: rgb(156,205,202);
-            padding: 1em;
-            border-radius: 5px;
-
-            &--item {
-                list-style: none;
-                font-size: 1rem;
-                font-weight: 600;
-            }
-
-            &--message {
-                padding-top: 1em;
-                padding-left: 2em;
-                font-size: 1.5rem;
-                color: white;
-                text-transform: none;
-                font-weight: 300;
-            }
-        }
-
-    } 
 </style>
 	
 <!-- Mon code  -->
 
 <main class="main">
 	<h1>{name}</h1>
-    <textarea cols="50" rows="5" on:input={updateMessage} placeholder="Write something..."></textarea>
+    <textarea cols="50" rows="5" bind:value={message} placeholder="Write something..."></textarea>
+    <button on:click={savedMessage} class="btn">send</button>
 </main>
 
-<button on:click={savedMessage}>send</button>
 
 <hr />
 
-<section class='display'>
-    <h2>Messages : </h2>
-    <div class="display-tab">
-        {#each messages as message}
-
-        <li class="display-tab--item">
-            {message.author} - <span class="date">{message.id}</span>  :
-            <div class="display-tab--message">{message.text}</div>
-        </li>
-        <br>
-        {/each}
-    </div>
-</section>    
