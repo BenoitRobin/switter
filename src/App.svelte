@@ -2,6 +2,9 @@
 	import Block from './components/block.svelte';
 	import List from './components/listMessages.svelte';
 
+
+    export let name;
+
 	let messages = [
         {
             id: 1609937812087,
@@ -28,17 +31,27 @@
 	border-radius: 5px;
 	padding: 10px;
 }
+h1 {
+		color: #ff3e00;
+		text-transform: uppercase;
+		text-align: center;
+		font-size: 4em;
+		font-weight: 100;
+	}
 </style>
 	
 <!-- Mon code  -->
 
 <main class='container'>
 
+	<h1>{name}</h1>
+
 	<Block 
-		name = Switter
-		author = 'Bob'
 		on:message={addMessage}
 	/>
-	<List messages = {messages} />
+
+	<List 
+		{messages}
+	/>
 </main>
 

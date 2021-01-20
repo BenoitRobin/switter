@@ -1,5 +1,18 @@
 <script>
     export let messages;
+
+    const options = {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        // second: '2-digit',
+        hour12: 'true'
+    }
+
+    const formatter = new Intl.DateTimeFormat('en-US', options);
 </script>
 
 
@@ -45,7 +58,7 @@
 
         {#each messages as message}
         <li class="display-tab--item">
-            {message.author} - <span class="date">{message.id}</span>  :
+            by {message.author} - <span class="date">{formatter.format(message.date)}</span>  :
             <div class="display-tab--message">{message.text}</div>
         </li>
         <br>

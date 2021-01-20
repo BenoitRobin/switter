@@ -1,24 +1,26 @@
 <script>
 
+
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
 
-    export let name;
-    export let author;
+    let author ='';
     let message = '';
-   
 
     function savedMessage() {
         const newMessage = {
             id: Date.now(),
             text: message,
-            author: author 
+            author: author,
+            date: new Date(),
         }
 
+        console.log('nouveau message : ', newMessage);
         dispatch('message', newMessage)
 
         message = '';
+        author= '';
 
     }
 
@@ -38,13 +40,6 @@
         justify-content: center;
         
 
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
 	}
 
     .btn {
@@ -75,7 +70,7 @@
 <!-- Mon code  -->
 
 <main class="main">
-	<h1>{name}</h1>
+    <input type="text" bind:value={author} placeholder='Your name'>
     <textarea cols="50" rows="5" bind:value={message} placeholder="Write something..."></textarea>
     <button on:click={savedMessage} class="btn">send</button>
 </main>
