@@ -10,6 +10,7 @@
     let maxLength = 24;
     $: nbCaracters = message.length;
     $: disabled = message.length > maxLength ? true : false;
+    let isVisible = false;
 
     function savedMessage() {
         const newMessage = {
@@ -26,6 +27,10 @@
 
     }
 
+    function toggle(){
+        isVisible=!isVisible
+    }
+
 </script>
 
 <!-- Mon style -->
@@ -40,6 +45,14 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        &-btnHide{
+            width: 50%;
+            margin: 1em auto;
+            padding: .5em 0;
+            border-radius: 5px;
+            background-color:  rgb(156,205,202);
+        }
 	}
 
     .validation {
@@ -86,6 +99,9 @@
 <!-- Mon code  -->
 
 <main class="main">
+    <button on:click={toggle} class='main-btnHide'>{isVisible ? 'Hide input text field' : 'Show input text field'}</button>
+
+    {#if isVisible}
     <input type="text" bind:value={author} placeholder='Your name'>
     <textarea cols="50" rows="5" bind:value={message} placeholder="Write something..."></textarea>
     <div class="validation">
@@ -98,6 +114,7 @@
         <button on:click={savedMessage} {disabled} class={disabled ? 'btnAlert' : 'validation-btn' }>send</button>
         
     </div>
+    {/if}
 </main>
 
 
